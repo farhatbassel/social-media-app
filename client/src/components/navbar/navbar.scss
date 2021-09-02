@@ -1,0 +1,112 @@
+@import '../../global.scss';
+
+.navbar-wrapper {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(52, 171, 201);
+    color: var(--clr-white);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+
+    .navbar-left {
+        flex: 3;
+
+        .logo {
+            margin-left: 30px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 900;
+        }
+    }
+
+    .navbar-center {
+        flex: 5;
+
+        .search-bar {
+            width: 100%;
+            background-color: var(--clr-white);
+            height: 30px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+
+            .search-icon {
+                color: var(--clr-black);
+                font-size: 25px !important;
+                margin-left: 10px;
+            }
+
+            input {
+                font-size: 15px;
+                border: none;
+                width: 85%;
+            }
+
+            input:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .navbar-right {
+        flex: 4;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .links {
+
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 700;
+
+            h2 {
+                margin-right: 50px;
+                text-transform: capitalize;
+                cursor: pointer;
+            }
+
+        }
+
+        .icons {
+            display: flex;
+            position: relative;
+
+            .navbar-icons {
+                margin-right: 15px;
+                cursor: pointer;
+                position: relative;
+                font-size: 15px;
+                margin-top: 6px;
+
+                .navbar-icon-badge {
+                    width: 15px;
+                    height: 15px;
+                    background-color: red;
+                    border-radius: 50%;
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    top: -5px;
+                    right: -5px;
+                    font-size: 12px;
+
+                }
+            }
+
+            .navbar-img {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                object-fit: cover;
+                cursor: pointer;
+                bottom: 50px;
+            }
+        }
+    }
+}

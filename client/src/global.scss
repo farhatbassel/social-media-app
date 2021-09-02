@@ -1,0 +1,28 @@
+*:root {
+  // Darker shades
+  --clr-primary-1: hsl(192, 68%, 10%);
+  --clr-primary-2: hsl(192, 65%, 20%);
+  --clr-primary-3: hsl(192, 59%, 30%);
+  --clr-primary-4: hsl(192, 59%, 40%);
+
+  // Primary color
+  --clr-primary-5: hsl(192, 59%, 50%);
+
+  // Lighter shades
+  --clr-primary-6: hsl(192, 89%, 60%);
+  --clr-primary-7: hsl(192, 90%, 70%);
+  --clr-primary-8: hsl(192, 86%, 81%);
+  --clr-primary-9: hsl(192, 90%, 88%);
+  --clr-primary-10: hsl(192, 100%, 96%);
+
+  --clr-white: #fff;
+  --clr-soft-white: #f1f1f1;
+  --clr-black: #000;
+  --clr-grey: rgb(179, 179, 179);
+  --clr-green: green;
+
+  --transition: all 0.3s linear;
+
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

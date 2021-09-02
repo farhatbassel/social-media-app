@@ -3,6 +3,7 @@ import birthday from '../../assets/gift.png'
 import ad from '../../assets/ad.png'
 import { Users } from '../../dummyData'
 import Online from '../online/Online'
+import image from '../../assets/person/1.jpeg'
 
 export default function Rightbar({ profile }) {
 
@@ -27,21 +28,48 @@ export default function Rightbar({ profile }) {
     const ProfileRightbar = () => {
         return (
             <>
-                <h4 className='rightbar-Title'>User information</h4>
-                <div className="rightbar-info">
+                <h4 className='rightbar-title'>User information</h4>
+                <section className="rightbar-info">
                     <div className="rightbar-info-item">
                         <span className="rightbar-info-key">City:</span>
                         <span className="rightbar-info-value">New York</span>
                     </div>
                     <div className="rightbar-info-item">
-                        <span className="rightbar-info-key">City:</span>
-                        <span className="rightbar-info-value"></span>
+                        <span className="rightbar-info-key">From:</span>
+                        <span className="rightbar-info-value">Madrid</span>
                     </div>
                     <div className="rightbar-info-item">
-                        <span className="rightbar-info-key">City:</span>
-                        <span className="rightbar-info-value"></span>
+                        <span className="rightbar-info-key">Status</span>
+                        <span className="rightbar-info-value">Single</span>
                     </div>
-                </div>
+                </section>
+                <h4 className="rightbar-followings-title">User Friends</h4>
+                <section className="rightbar-followings">
+                    <div className="rightbar-following">
+                        <img src={image} alt="" className="rightbar-following-image" />
+                        <span className="rightbar-following-name">John Doe</span>
+                    </div>
+                    <div className="rightbar-following">
+                        <img src="assets/person/1.jpeg" alt="" className="rightbar-following-image" />
+                        <span className="rightbar-following-name">John Doe</span>
+                    </div>
+                    <div className="rightbar-following">
+                        <img src="assets/person/1.jpeg" alt="" className="rightbar-following-image" />
+                        <span className="rightbar-following-name">John Doe</span>
+                    </div>
+                    <div className="rightbar-following">
+                        <img src="assets/person/1.jpeg" alt="" className="rightbar-following-image" />
+                        <span className="rightbar-following-name">John Doe</span>
+                    </div>
+                    <div className="rightbar-following">
+                        <img src="assets/person/1.jpeg" alt="" className="rightbar-following-image" />
+                        <span className="rightbar-following-name">John Doe</span>
+                    </div>
+                    <div className="rightbar-following">
+                        <img src="assets/person/1.jpeg" alt="" className="rightbar-following-image" />
+                        <span className="rightbar-following-name">John Doe</span>
+                    </div>
+                </section>
             </>
         )
     }
@@ -49,7 +77,7 @@ export default function Rightbar({ profile }) {
     return (
         <div className='rightbar'>
             <div className="rightbar-wrapper">
-                <ProfileRightbar />
+                {profile ? <ProfileRightbar /> : <HomeRightbar />}
             </div>
         </div>
     )

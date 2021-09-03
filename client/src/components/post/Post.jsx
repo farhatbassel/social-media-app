@@ -1,14 +1,25 @@
 import './post.scss'
 import { MoreVert } from '@material-ui/icons'
-import likeImage from '../../assets/like.png'
-import heartImage from '../../assets/heart.png'
-import { Users } from '../../dummyData'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { format } from 'timeago.js'
+import { Link } from "react-router-dom"
 
 export default function Post({ post }) {
 
-    const [like, setLike] = useState(post.like)
+    const [like, setLike] = useState(post.likes.length)
     const [isLiked, setIsLiked] = useState(false)
+    const [user, setUser] = useState({})
+
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(`/users?userId=${post.userId}`)
+            setUser(res.data)
+        }
+        fetchUser()
+    }, [post.userId])
 
     const likeHandler = () => {
         setLike(isLiked ? like - 1 : like + 1)
@@ -19,9 +30,11 @@ export default function Post({ post }) {
             <div className="post-wrapper">
                 <section className="post-top">
                     <div className="post-top-left">
-                        <img src={Users.filter(u => u.id === post?.userId)[0].profilePicture} className='post-profile-image' alt="" />
-                        <span className='post-username'>{Users.filter(u => u.id === post?.userId)[0].username}</span>
-                        <span className='post-date'>{post.date}</span>
+                        <Link to={`/profile/${user.username}`}>
+                            <img src={user.profilePictures || PF + "person/noAvatar.png"} className='post-profile-image' alt="" />
+                        </Link>
+                        <span className='post-username'>{user.username}</span>
+                        <span className='post-date'>{format(post.createdAt)}</span>
                     </div>
                     <div className="post-top-right">
                         <MoreVert />
@@ -29,12 +42,12 @@ export default function Post({ post }) {
                 </section>
                 <section className="post-center">
                     <span className="post-text">{post?.desc}</span>
-                    <img src={post.photo} className='post-image' alt="" />
+                    <img src={PF + post.img} className='post-image' alt="" />
                 </section>
                 <section className="post-bottom">
                     <div className="post-bottom-left">
-                        <img className='like-icon' src={likeImage} onClick={likeHandler} alt="like-image" />
-                        <img className='like-icon' src={heartImage} onClick={likeHandler} alt="heart-image" />
+                        <img className='like-icon' src={`${PF}like.png`} onClick={likeHandler} alt="like-image" />
+                        <img className='like-icon' src={`${PF}heart.png`} onClick={likeHandler} alt="heart-image" />
                         <span className="post-like-counter">{like}</span>
                     </div>
                     <div className="post-bottom-right">

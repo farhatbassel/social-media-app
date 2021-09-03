@@ -1,13 +1,15 @@
 import "./share.scss"
-import person from "../../assets/person/1.jpeg"
 import { PermMedia, Label, Room, EmojiEmotions } from '@material-ui/icons'
 
 export default function Share() {
+
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
     return (
         <div className='share'>
             <div className="share-wrapper">
                 <section className="share-top">
-                    <img className="share-profile-image" src={person} alt="" />
+                    <img className="share-profile-image" src={`${PF}person/1.jpeg`} alt="" />
                     <input placeholder="What's on your mind?" className="share-input" />
                 </section>
                 <hr className='share-hr' />

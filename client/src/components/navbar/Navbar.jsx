@@ -1,13 +1,18 @@
 import React from 'react'
 import './navbar.scss'
 import { Search, Person, Message, Notifications } from '@material-ui/icons'
-import image from "../../assets/person/1.jpeg"
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
+
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
     return (
         <nav className='navbar-wrapper'>
             <div className="navbar-left">
-                <div><span className="logo">BF</span></div>
+                <Link to='/' style={{ textDecoration: "none", color: 'white' }}>
+                    <div><span className="logo">BF</span></div>
+                </Link>
             </div>
             <div className="navbar-center">
                 <div className="search-bar">
@@ -33,7 +38,7 @@ export default function Navbar() {
                         <Notifications />
                         <span className='navbar-icon-badge'>2</span>
                     </div>
-                    <img src={image} alt="" className="navbar-img" />
+                    <img src={`${PF}person/1.jpeg`} alt="" className="navbar-img" />
                 </div>
             </div>
         </nav >

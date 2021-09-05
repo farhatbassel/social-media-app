@@ -70,13 +70,13 @@
         .rightbar-followings {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
 
             .rightbar-following {
 
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 20px;
+                margin: 0px 20px 20px 0;
                 cursor: pointer;
 
                 .rightbar-following-image {
@@ -84,7 +84,32 @@
                     width: 100px;
                     object-fit: cover;
                 }
+
+                .rightbar-following-name {
+                    text-align: center;
+                    color: #000;
+                    padding-top: 10px;
+                }
             }
         }
+    }
+
+    .rightbar-follow-button {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        border: none;
+        background-color: var(--clr-primary-5);
+        color: var(--clr-white);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .rightbar-follow-button:focus {
+        outline: none;
     }
 }

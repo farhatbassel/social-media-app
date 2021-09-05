@@ -1,16 +1,17 @@
 import './post.scss'
 import { MoreVert } from '@material-ui/icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { format } from 'timeago.js'
 import { Link } from "react-router-dom"
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Post({ post }) {
 
     const [like, setLike] = useState(post.likes.length)
     const [isLiked, setIsLiked] = useState(false)
     const [user, setUser] = useState({})
-
+    const { user: currentUser } = useContext(AuthContext)
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
     useEffect(() => {
@@ -21,7 +22,17 @@ export default function Post({ post }) {
         fetchUser()
     }, [post.userId])
 
+
+    useEffect(() => {
+        setIsLiked(post.likes.includes(currentUser._id))
+    }, [currentUser._id, post.likes])
+
     const likeHandler = () => {
+        try {
+            axios.put("/posts/" + post._id + "/like", { userId: currentUser._id })
+        } catch (error) {
+            console.log(error)
+        }
         setLike(isLiked ? like - 1 : like + 1)
         setIsLiked(!isLiked)
     }
@@ -31,7 +42,7 @@ export default function Post({ post }) {
                 <section className="post-top">
                     <div className="post-top-left">
                         <Link to={`/profile/${user.username}`}>
-                            <img src={user.profilePictures || PF + "person/noAvatar.png"} className='post-profile-image' alt="" />
+                            <img src={user.profilePictures ? user.profilePictures : PF + "person/noAvatar.png"} className='post-profile-image' alt="Profile" />
                         </Link>
                         <span className='post-username'>{user.username}</span>
                         <span className='post-date'>{format(post.createdAt)}</span>
@@ -46,8 +57,8 @@ export default function Post({ post }) {
                 </section>
                 <section className="post-bottom">
                     <div className="post-bottom-left">
-                        <img className='like-icon' src={`${PF}like.png`} onClick={likeHandler} alt="like-image" />
-                        <img className='like-icon' src={`${PF}heart.png`} onClick={likeHandler} alt="heart-image" />
+                        <img className='like-icon' src={`${PF}like.png`} onClick={likeHandler} alt="like" />
+                        <img className='like-icon' src={`${PF}heart.png`} onClick={likeHandler} alt="heart" />
                         <span className="post-like-counter">{like}</span>
                     </div>
                     <div className="post-bottom-right">

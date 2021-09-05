@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './navbar.scss'
 import { Search, Person, Message, Notifications } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
+import { AuthContext } from "../../context/AuthContext"
 
 export default function Navbar() {
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
+    const { user } = useContext(AuthContext)
 
     return (
         <nav className='navbar-wrapper'>
@@ -38,7 +40,9 @@ export default function Navbar() {
                         <Notifications />
                         <span className='navbar-icon-badge'>2</span>
                     </div>
-                    <img src={`${PF}person/1.jpeg`} alt="" className="navbar-img" />
+                    <Link to={`/profile/${user.username}`}>
+                        <img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="" className="navbar-img" />
+                    </Link>
                 </div>
             </div>
         </nav >

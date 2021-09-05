@@ -32,7 +32,7 @@
             }
 
             .login-box {
-                height: 300px;
+                height: 350px;
                 padding: 20px;
                 background-color: var(--clr-white);
                 border-radius: 10px;
@@ -67,9 +67,14 @@
                     cursor: pointer;
                 }
 
+                .login-button:focus {
+                    outline: none;
+                }
+
                 .login-forgot {
                     text-align: center;
                     color: var(--clr-primary-5);
+                    cursor: pointer;
                 }
 
                 .login-register-button {
@@ -83,6 +88,10 @@
                     font-size: 20px;
                     font-weight: 500;
                     cursor: pointer;
+                }
+
+                .login-register-button {
+                    outline: none;
                 }
             }
         }

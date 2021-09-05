@@ -1,7 +1,7 @@
 {
   "name": "social-media-app",
   "version": "1.0.0",
-  "description": "A social media with full front and back-end.",
+  "description": "A full stack MERN Social Media application  .",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/farhatbassel/social-media-app.git"
   },
-  "author": "",
+  "author": "Bassel Farhat",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/farhatbassel/social-media-app/issues"
@@ -23,6 +23,8 @@
     "helmet": "^4.6.0",
     "mongoose": "^6.0.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.12"
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.12",
+    "path": "^0.12.7"
   }
 }

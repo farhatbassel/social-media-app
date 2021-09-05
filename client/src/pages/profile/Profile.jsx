@@ -6,18 +6,20 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import './profile.scss'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router';
 
 export default function Profile() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
     const [user, setUser] = useState({})
+    const username = useParams().username
 
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`/users?username=john`)
+            const res = await axios.get(`/users?username=${username}`)
             setUser(res.data)
         }
         fetchUser()
-    }, [])
+    }, [username])
 
     return (
         <>
@@ -27,8 +29,8 @@ export default function Profile() {
                 <div className="profile-right">
                     <section className="profile-right-top">
                         <div className="profile-cover">
-                            <img src={`${PF}post/3.jpeg`} alt="profile-cover-image" className='profile-cover-image' />
-                            <img src={`${PF}person/3.jpeg`} alt="profile-user-image" className='profile-user-image' />
+                            <img src={user.coverPicture ? PF + user.coverPicture : PF + "person/noCover.png"} alt="profile-cover" className='profile-cover-image' />
+                            <img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="profile-user" className='profile-user-image' />
                         </div>
                         <div className='profile-info'>
                             <h4 className="profile-info-name">{user.username}</h4>
@@ -36,7 +38,7 @@ export default function Profile() {
                         </div>
                     </section>
                     <section className="profile-right-bottom">
-                        <Feed username='john' />
+                        <Feed username={username} />
                         <Rightbar user={user} />
                     </section>
                 </div>

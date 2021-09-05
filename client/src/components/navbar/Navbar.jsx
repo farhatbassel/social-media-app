@@ -40,10 +40,10 @@ export default function Navbar() {
                         <Notifications />
                         <span className='navbar-icon-badge'>2</span>
                     </div>
-                    <Link to={`/profile/${user.username}`}>
-                        <img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="" className="navbar-img" />
-                    </Link>
                 </div>
+                <Link to={`/profile/${user.username}`}>
+                    <img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="" className="navbar-img" />
+                </Link>
             </div>
         </nav >
     )

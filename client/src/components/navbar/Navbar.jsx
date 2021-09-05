@@ -23,10 +23,10 @@ export default function Navbar() {
                 </div>
             </div>
             <div className="navbar-right">
-                <div className="links">
+                {/* <div className="links">
                     <span className="link"><h2>home</h2></span>
                     <span className="link"><h2>timeline</h2></span>
-                </div>
+                </div> */}
                 <div className="icons">
                     <div className="navbar-icons" id="profile">
                         <Person />

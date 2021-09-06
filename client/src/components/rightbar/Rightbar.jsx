@@ -5,41 +5,63 @@ import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-import { Add, Remove } from '@material-ui/icons'
+import { Add, Remove, Star } from '@material-ui/icons'
 
 
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
-    const [friends, setFriends] = useState([])
+    const [friends, setFriends] = useState([]);
     const { user: currentUser, dispatch } = useContext(AuthContext)
-    const [followed, setFollowed] = useState(currentUser.followings.includes(user?.id))
+    const [followed, setFollowed] = useState(
+        currentUser.followings.includes(user?.id)
+    );
+    const [favored, setFavored] = useState(currentUser.favorites.includes(user?._id))
 
     useEffect(() => {
         const getFriends = async () => {
             try {
-                const friendList = await axios.get('/users/friends/' + user._id)
-                setFriends(friendList.data)
-            } catch (error) {
-                console.log(error)
+                const friendList = await axios.get("/users/friends/" + user._id);
+                setFriends(friendList.data);
+            } catch (err) {
+                console.log(err);
             }
-        }
-        getFriends()
-    }, [user])
+        };
+        getFriends();
+    }, [user]);
 
     const handleFollow = async () => {
         try {
             if (followed) {
-                await axios.put('/users/' + user._id + '/unfollow', { userId: currentUser._id })
-                dispatch({ type: 'UNFOLLOW', payload: user._id })
+                await axios.put(`/users/${user._id}/unfollow`, {
+                    userId: currentUser._id,
+                });
+                dispatch({ type: "UNFOLLOW", payload: user._id });
             } else {
-                await axios.put('/users/' + user._id + '/follow', { userId: currentUser._id })
-                dispatch({ type: 'FOLLOW', payload: user._id })
+                await axios.put(`/users/${user._id}/follow`, {
+                    userId: currentUser._id,
+                });
+                dispatch({ type: "FOLLOW", payload: user._id });
+            }
+            setFollowed(!followed);
+        } catch (err) {
+        }
+    };
+
+    const handleFavorite = async () => {
+        try {
+            if (favored) {
+                await axios.put('/users/' + user._id + '/unfavorite', { userId: currentUser._id })
+                dispatch({ type: 'UNFAVORITE', payload: user._id })
+            } else {
+                await axios.put('/users/' + user._id + '/favorite', { userId: currentUser._id })
+                dispatch({ type: 'FAVORITE', payload: user._id })
             }
         } catch (error) {
             console.log(error)
         }
-        setFollowed(!followed)
+        setFavored(!favored)
     }
+
 
     const HomeRightbar = () => {
         return (
@@ -63,12 +85,20 @@ export default function Rightbar({ user }) {
     const ProfileRightbar = () => {
         return (
             <>
-                {user.username !== currentUser.username && (
-                    <button className="rightbar-follow-button" onClick={handleFollow}>
-                        {followed ? 'Unfollow' : 'Follow'}
-                        {followed ? <Remove /> : <Add />}
-                    </button>
-                )}
+                <div className="rightbar-followage-container">
+                    {user.username !== currentUser.username && (
+                        <button className="rightbar-follow-button" onClick={handleFollow}>
+                            {followed ? 'Unfollow' : 'Follow'}
+                            {followed ? <Remove /> : <Add />}
+                        </button>
+                    )}
+                    {user.username !== currentUser.username && (
+                        <button className="rightbar-favorite-button" onClick={handleFavorite}>
+                            {favored ? 'Remove' : 'Favorite'}
+                            {favored ? <Remove /> : <Star />}
+                        </button>
+                    )}
+                </div>
                 <h4 className='rightbar-title'>User information</h4>
                 <section className="rightbar-info">
                     <div className="rightbar-info-item">

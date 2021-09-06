@@ -36,6 +36,24 @@ const AuthReducer = (state, action) => {
                     followings: state.user.followings.filter(following => following !== action.payload)
                 }
             };
+
+        case "FAVORITE":
+            return{
+                ...state,
+                user: {
+                    ...state.user,
+                    favorites: [...state.user.favorites, action.payload]
+                }
+            };
+        
+        case "UNFAVORITE":
+            return{
+                ...state,
+                user: {
+                    ...state.user,
+                    favorites: state.user.favorites.filter(favorite => favorite !== action.payload)
+                }
+            };
     
         default:
             return state

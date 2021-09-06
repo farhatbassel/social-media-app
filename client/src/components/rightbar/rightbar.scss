@@ -57,8 +57,6 @@
                 }
             }
 
-
-
         }
 
         .rightbar-followings-title {
@@ -94,22 +92,44 @@
         }
     }
 
-    .rightbar-follow-button {
-        margin-top: 30px;
-        margin-bottom: 10px;
-        border: none;
-        background-color: var(--clr-primary-5);
-        color: var(--clr-white);
-        border-radius: 10px;
+    .rightbar-followage-container {
         display: flex;
         align-items: center;
-        padding: 5px 10px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-    }
 
-    .rightbar-follow-button:focus {
-        outline: none;
+        .rightbar-follow-button {
+            margin: 30px 20px 10px 0;
+            border: none;
+            background-color: var(--clr-primary-5);
+            color: var(--clr-white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .rightbar-follow-button:focus {
+            outline: none;
+        }
+
+        .rightbar-favorite-button {
+            margin: 30px 20px 10px 0;
+            border: none;
+            background-color: var(--clr-golden);
+            color: var(--clr-white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .rightbar-follow-button:focus {
+            outline: none;
+        }
     }
 }

@@ -20,3 +20,13 @@ export const LoginStart = (userCredentials) => ({
     type: "UNFOLLOW",
     payload: userId,
   });
+
+  export const Favorite = (userId) => ({
+    type: "FAVORITE",
+    payload: userId,
+  });
+  
+  export const Unfavorite = (userId) => ({
+    type: "UNFAVORITE",
+    payload: userId,
+  });

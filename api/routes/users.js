@@ -77,6 +77,25 @@ router.get('/friends/:userId', async (req,res)=>{
   }
 })
 
+router.get('/favorites/:userId', async (req,res)=>{
+  try {
+    const user = await User.findById(req.params.userId)
+    const favorites = await Promise.all(
+      user.favorites.map((favoriteId) => {
+        return User.findById(favoriteId)
+      } )
+    )
+    let favoriteList = []
+    favorites.map(favorite =>{
+      const { _id, username, profilePicture} = favorite
+      favoriteList.push({_id, username, profilePicture})
+    })
+    res.status(200).json(favoriteList)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
+
 router.put("/:id/follow", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
@@ -132,4 +151,51 @@ router.put("/:id/unfollow", async (req, res) => {
     res.status(403).json("You cannot unfollow yourself");
   }
 });
+
+router.put("/:id/favorite", async (req, res) => {
+  if (req.body.userId !== req.params.id) {
+    try {
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userId);
+      if (!currentUser.favorites.includes(user._id)) {
+        await currentUser.updateOne({
+          $push: {
+            favorites: req.params.id
+          }
+        });
+        res.status(200).json("User has been favored");
+      } else {
+        res.status(403).json("This user is already a favorite");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  } else {
+    res.status(403).json("You cannot favor yourself");
+  }
+});
+
+router.put("/:id/unfavorite", async (req, res) => {
+  if (req.body.userId !== req.params.id) {
+    try {
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userId);
+      if (currentUser.favorites.includes(user._id)) {
+        await currentUser.updateOne({
+          $pull: {
+            favorites: req.params.id
+          }
+        });
+        res.status(200).json("User has been removed from favorites");
+      } else {
+        res.status(403).json("This user isn't a favorite");
+      }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("You cannot unfavor yourself");
+  }
+});
+
 module.exports = router

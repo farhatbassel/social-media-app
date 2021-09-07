@@ -18,7 +18,6 @@ const AuthReducer = (state, action) => {
                 isFetching: false,
                 error: action.payload
             };
-
         case "FOLLOW":
             return{
                 ...state,
@@ -26,8 +25,7 @@ const AuthReducer = (state, action) => {
                     ...state.user,
                     followings: [...state.user.followings, action.payload]
                 }
-            };
-        
+            };      
         case "UNFOLLOW":
             return{
                 ...state,
@@ -36,7 +34,6 @@ const AuthReducer = (state, action) => {
                     followings: state.user.followings.filter(following => following !== action.payload)
                 }
             };
-
         case "FAVORITE":
             return{
                 ...state,
@@ -45,7 +42,6 @@ const AuthReducer = (state, action) => {
                     favorites: [...state.user.favorites, action.payload]
                 }
             };
-        
         case "UNFAVORITE":
             return{
                 ...state,
@@ -54,7 +50,6 @@ const AuthReducer = (state, action) => {
                     favorites: state.user.favorites.filter(favorite => favorite !== action.payload)
                 }
             };
-    
         default:
             return state
     }

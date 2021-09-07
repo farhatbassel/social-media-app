@@ -27,10 +27,29 @@
             margin: 30px 0;
         }
 
-        .rightbar-title {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 10px;
+        .rightbar-heading-container {
+            display: flex;
+            width: 70%;
+            justify-content: space-between;
+
+            .rightbar-title {
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+
+            .rightbar-edit-button {
+                border: none;
+                background-color: var(--clr-primary-5);
+                color: var(--clr-white);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                padding: 5px 10px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+            }
         }
 
         .rightbar-friend-list {

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { format } from 'timeago.js'
 import { Link } from "react-router-dom"
 import { AuthContext } from '../../context/AuthContext'
+import Heart from '../heart/Heart'
 
 export default function Post({ post }) {
 
@@ -57,8 +58,11 @@ export default function Post({ post }) {
                 </section>
                 <section className="post-bottom">
                     <div className="post-bottom-left">
-                        <img className='like-icon' src={`${PF}like.png`} onClick={likeHandler} alt="like" />
-                        <img className='like-icon' src={`${PF}heart.png`} onClick={likeHandler} alt="heart" />
+                        {/* <img className='like-icon' src={`${PF}like.png`} onClick={likeHandler} alt="like" /> */}
+                        {/* <img className='like-icon' src={`${PF}heart.png`} onClick={likeHandler} alt="heart" /> */}
+                        <button className='post-heart-button' onClick={likeHandler}>
+                            <Heart isLiked={isLiked} />
+                        </button>
                         <span className="post-like-counter">{like}</span>
                     </div>
                     <div className="post-bottom-right">

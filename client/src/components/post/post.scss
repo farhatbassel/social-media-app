@@ -59,12 +59,19 @@
                 .like-icon {
                     width: 24px;
                     height: 24px;
-                    margin-right: 5px;
+                    margin-right: 7px;
                     cursor: pointer;
+                }
+
+                .post-heart-button {
+                    border: none;
+                    background-color: var(--clr-white);
+                    margin-left: 5px;
                 }
 
                 .post-like-counter {
                     font-style: 15px;
+                    margin-left: 10px;
                 }
             }
 

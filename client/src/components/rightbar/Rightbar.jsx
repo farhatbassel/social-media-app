@@ -5,25 +5,25 @@ import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-import { Add, Remove, Star } from '@material-ui/icons'
-
+import { Add, Edit, Remove, Star } from '@material-ui/icons'
+import InfoEdit from '../infoEdit/InfoEdit'
+import DisplayInfo from '../displayInfo/DisplayInfo'
 
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
     const [friends, setFriends] = useState([]);
     const { user: currentUser, dispatch } = useContext(AuthContext)
-    const [followed, setFollowed] = useState(
-        currentUser.followings.includes(user?.id)
-    );
+    const [followed, setFollowed] = useState(currentUser.followings.includes(user?.id));
     const [favored, setFavored] = useState(currentUser.favorites.includes(user?._id))
+    const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
         const getFriends = async () => {
             try {
                 const friendList = await axios.get("/users/friends/" + user._id);
                 setFriends(friendList.data);
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                console.log(error);
             }
         };
         getFriends();
@@ -42,9 +42,10 @@ export default function Rightbar({ user }) {
                 });
                 dispatch({ type: "FOLLOW", payload: user._id });
             }
-            setFollowed(!followed);
-        } catch (err) {
+        } catch (error) {
+            console.log(error)
         }
+        setFollowed(!followed);
     };
 
     const handleFavorite = async () => {
@@ -61,7 +62,6 @@ export default function Rightbar({ user }) {
         }
         setFavored(!favored)
     }
-
 
     const HomeRightbar = () => {
         return (
@@ -99,22 +99,19 @@ export default function Rightbar({ user }) {
                         </button>
                     )}
                 </div>
-                <h4 className='rightbar-title'>User information</h4>
-                <section className="rightbar-info">
-                    <div className="rightbar-info-item">
-                        <span className="rightbar-info-key">City:</span>
-                        <span className="rightbar-info-value">{user.city}</span>
-                    </div>
-                    <div className="rightbar-info-item">
-                        <span className="rightbar-info-key">From:</span>
-                        <span className="rightbar-info-value">{user.from}</span>
-                    </div>
-                    <div className="rightbar-info-item">
-                        <span className="rightbar-info-key">Status</span>
-                        <span className="rightbar-info-value">{user.relationship === 1 ? 'Single' : user.relationship === 2 ? 'Married' : '-'}</span>
-                    </div>
-                </section>
-                <h4 className="rightbar-followings-title">User Friends</h4>
+                <div className="rightbar-heading-container">
+                    <h4 className='rightbar-title'>User information</h4>
+                    {user.username === currentUser.username && (
+                        <button className="rightbar-edit-button" onClick={() => setIsEditing(true)}>
+                            <Edit />
+                        </button>
+                    )}
+                </div>
+                {
+                    isEditing ?
+                        < InfoEdit user={user} setIsEditing={setIsEditing} isEditing={isEditing} /> : <DisplayInfo user={user} />
+                }
+                <h4 className="rightbar-followings-title">Followings</h4>
                 <section className="rightbar-followings">
                     {friends.map((friend) => (
                         <Link to={'/profile/' + friend.username} style={{ textDecoration: "none" }}>

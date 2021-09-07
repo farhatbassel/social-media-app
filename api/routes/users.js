@@ -16,9 +16,9 @@ router.put("/:id", async (req, res) => {
       const user = await User.findByIdAndUpdate(req.params.id, {
         $set: req.body
       })
-      req.status(200).json('Account Updated')
+      res.status(200).json('Account Updated')
     } catch (error) {
-      return res.status(500).json(error)
+      return res.status(500).json(`The error is here${error}`)
     }
   } else {
     return res.status(403).json('You can only update your account')

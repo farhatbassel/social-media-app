@@ -34,8 +34,10 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li className="sidebar-list-item">
-                        <Message className='sidebar-icon' />
-                        <span className="sidebar-list-item-text">Chats</span>
+                        <Link to={`/messenger`} style={{ textDecoration: "none", color: "#000", display: 'flex', alignItems: 'center' }}>
+                            <Message className='sidebar-icon' />
+                            <span className="sidebar-list-item-text">Chats</span>
+                        </Link>
                     </li>
                     <li className="sidebar-list-item">
                         <PlayCircleOutline className='sidebar-icon' />

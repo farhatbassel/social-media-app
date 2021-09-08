@@ -27,8 +27,29 @@
             margin: 30px 0;
         }
 
-        .rightbar-title {
-            margin-bottom: 20px;
+        .rightbar-heading-container {
+            display: flex;
+            width: 70%;
+            justify-content: space-between;
+
+            .rightbar-title {
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+
+            .rightbar-edit-button {
+                border: none;
+                background-color: var(--clr-primary-5);
+                color: var(--clr-white);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                padding: 5px 10px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+            }
         }
 
         .rightbar-friend-list {
@@ -36,6 +57,98 @@
             margin: 0;
             list-style: none;
 
+        }
+
+        .rightbar-info {
+            margin-bottom: 30px;
+
+            .rightbar-info-item {
+                margin-bottom: 10px;
+
+                .rightbar-info-key {
+                    font-weight: 500;
+                    margin-right: 15px;
+                    color: var(--clr-grey);
+                }
+
+                .rightbar-info-value {
+                    font-weight: 300;
+                }
+            }
+
+        }
+
+        .rightbar-followings-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .rightbar-followings {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+            .rightbar-following {
+
+                display: flex;
+                flex-direction: column;
+                margin: 0px 20px 20px 0;
+                cursor: pointer;
+
+                .rightbar-following-image {
+                    height: 100px;
+                    width: 100px;
+                    object-fit: cover;
+                }
+
+                .rightbar-following-name {
+                    text-align: center;
+                    color: #000;
+                    padding-top: 10px;
+                }
+            }
+        }
+    }
+
+    .rightbar-followage-container {
+        display: flex;
+        align-items: center;
+
+        .rightbar-follow-button {
+            margin: 30px 20px 10px 0;
+            border: none;
+            background-color: var(--clr-primary-5);
+            color: var(--clr-white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .rightbar-follow-button:focus {
+            outline: none;
+        }
+
+        .rightbar-favorite-button {
+            margin: 30px 20px 10px 0;
+            border: none;
+            background-color: var(--clr-golden);
+            color: var(--clr-white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .rightbar-follow-button:focus {
+            outline: none;
         }
     }
 }

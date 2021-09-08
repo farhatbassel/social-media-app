@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "sass": "^1.38.2"
-  }
-}

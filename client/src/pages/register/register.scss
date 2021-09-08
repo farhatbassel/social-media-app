@@ -1,0 +1,92 @@
+@import '../../global.scss';
+
+.login {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .login-wrapper {
+        width: 70%;
+        height: 70%;
+        display: flex;
+
+        .login-left,
+        .login-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .login-logo {
+                font-size: 70px;
+                font-weight: 800;
+                color: var(--clr-primary-5);
+                margin-bottom: 10px;
+            }
+
+            .login-desc {
+                font-size: 40px;
+            }
+
+            .register-box {
+                height: 400px;
+                padding: 20px;
+                background-color: var(--clr-white);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .login-input {
+                    height: 50px;
+                    align-self: center;
+                    width: 80%;
+                    border-radius: 10px;
+                    border: 1px solid var(--clr-grey);
+                    font-size: 18px;
+                    padding-left: 20px;
+                }
+
+                .login-input:focus {
+                    outline: none;
+                }
+
+                .login-button {
+                    height: 50px;
+                    align-self: center;
+                    width: 50%;
+                    border-radius: 10px;
+                    border: none;
+                    background-color: var(--clr-primary-5);
+                    color: var(--clr-white);
+                    font-size: 20px;
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+
+                .login-forgot {
+                    text-align: center;
+                    color: var(--clr-primary-5);
+                }
+
+
+                .login-register-button {
+                    height: 50px;
+                    margin-left: 160px;
+                    align-self: center;
+                    width: 50%;
+                    border-radius: 10px;
+                    border: none;
+                    background-color: #42b72a;
+                    color: var(--clr-white);
+                    font-size: 20px;
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

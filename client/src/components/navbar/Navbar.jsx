@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './navbar.scss'
 import { Search, Person, Message, Notifications } from '@material-ui/icons'
-import image from "../../assets/person/1.jpeg"
+import { Link } from 'react-router-dom'
+import { AuthContext } from "../../context/AuthContext"
 
 export default function Navbar() {
+
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER
+    const { user } = useContext(AuthContext)
+
     return (
         <nav className='navbar-wrapper'>
             <div className="navbar-left">
-                <div><span className="logo">BF</span></div>
+                <Link to='/' style={{ textDecoration: "none", color: 'white' }}>
+                    <div><span className="logo">BF</span></div>
+                </Link>
             </div>
             <div className="navbar-center">
                 <div className="search-bar">
@@ -16,10 +23,10 @@ export default function Navbar() {
                 </div>
             </div>
             <div className="navbar-right">
-                <div className="links">
+                {/* <div className="links">
                     <span className="link"><h2>home</h2></span>
                     <span className="link"><h2>timeline</h2></span>
-                </div>
+                </div> */}
                 <div className="icons">
                     <div className="navbar-icons" id="profile">
                         <Person />
@@ -33,8 +40,10 @@ export default function Navbar() {
                         <Notifications />
                         <span className='navbar-icon-badge'>2</span>
                     </div>
-                    <img src={image} alt="" className="navbar-img" />
                 </div>
+                <Link to={`/profile/${user.username}`}>
+                    <img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="" className="navbar-img" />
+                </Link>
             </div>
         </nav >
     )

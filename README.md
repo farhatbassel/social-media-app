@@ -1,7 +1,18 @@
-# Social Media MERN 
+# MERN Social Media App
 
-A social media with full front and back-end.
+A full stack MERN Social Media App.
 
-Using React as front-end. Needs reponsive design implementations.
+Front-end technologies used:
 
-In the backend using Node and Express. Also using MongoDB to take care of the API.
+1. React
+2. Material UI
+3. SASS
+
+Back-end technologies implemented:
+
+1. Express
+2. NodeJS
+3. MongoDB
+4. SocketIO
+
+

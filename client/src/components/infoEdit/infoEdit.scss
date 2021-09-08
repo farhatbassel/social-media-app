@@ -1,0 +1,51 @@
+.rightbar-info {
+    display: flex;
+    flex-direction: column;
+
+    .rightbar-info-label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .rightbar-info-title {
+            margin-right: 10px;
+        }
+
+        .rightbar-input {
+            font-weight: 500;
+            font-size: 14px;
+            margin-right: 5px;
+            color: var(--clr-grey);
+            border: none;
+            border-bottom: 1px var(--clr-grey) solid;
+        }
+
+        .rightbar-input:focus {
+            outline: none;
+        }
+
+        .rightbar-radio {
+            display: flex;
+            align-items: center;
+
+            .rightbar-input-span {
+                margin: 0 5px;
+            }
+        }
+
+    }
+
+    .rightbar-button {
+        margin-left: 80px;
+        border: none;
+        background-color: var(--clr-primary-5);
+        color: var(--clr-white);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}

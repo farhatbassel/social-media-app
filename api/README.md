@@ -1,2 +1,3 @@
-# social-media-app
-A social media with full front and back-end.
+# Backend
+
+This directory contains the back-end of the server.

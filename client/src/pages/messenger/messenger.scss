@@ -33,6 +33,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        position: relative;
 
         .chat-box-top {
             height: 100%;
@@ -65,6 +66,16 @@
                 cursor: pointer;
                 font-size: 16px;
             }
+        }
+
+        .no-conversation {
+            position: absolute;
+            top: 10%;
+            font-size: 50px;
+            color: var(--clr-grey);
+            cursor: default;
+            text-align: center;
+
         }
     }
 }

@@ -8,6 +8,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { Add, Edit, Remove, Star } from '@material-ui/icons'
 import InfoEdit from '../infoEdit/InfoEdit'
 import DisplayInfo from '../displayInfo/DisplayInfo'
+import Followings from '../following/Followings'
 
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
@@ -114,11 +115,8 @@ export default function Rightbar({ user }) {
                 <h4 className="rightbar-followings-title">Followings</h4>
                 <section className="rightbar-followings">
                     {friends.map((friend) => (
-                        <Link to={'/profile/' + friend.username} style={{ textDecoration: "none" }}>
-                            <div className="rightbar-following">
-                                <img src={friend.profilePicture ? PF + friend.profilePicture : PF + "person/noAvatar.png"} alt="" className="rightbar-following-image" />
-                                <span className="rightbar-following-name">{friend.username}</span>
-                            </div>
+                        <Link to={'/profile/' + friend.username} style={{ textDecoration: "none" }} key={friend._id}>
+                            <Followings friend={friend} />
                         </Link>
                     )
                     )}

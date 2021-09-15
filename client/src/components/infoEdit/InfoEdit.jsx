@@ -2,17 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './infoEdit.scss'
 
-export default function InfoEdit({ user, setIsEditing }) {
+export default function InfoEdit({ user, setIsEditing, isEditing }) {
     const [userInfo, setUserInfo] = useState(user)
-
-    const handleEdit = async (e) => {
-        try {
-            await axios.put(`/users/${user._id}`, { userId: userInfo._id, city: userInfo.city, from: userInfo.from, relationship: userInfo.relationship })
-        } catch (error) {
-            console.log(error)
-        }
-        setIsEditing(false)
-    }
 
     useEffect(() => {
         const getUserInfo = async () => {
@@ -25,6 +16,17 @@ export default function InfoEdit({ user, setIsEditing }) {
         }
         getUserInfo()
     }, [userInfo, user])
+
+    const handleEdit = async (e) => {
+        e.preventDefault()
+        try {
+            await axios.put(`/users/${user._id}`, { userId: userInfo._id, city: userInfo.city, from: userInfo.from, relationship: userInfo.relationship })
+        } catch (error) {
+            console.log(error)
+        }
+        setIsEditing(false)
+        return isEditing
+    }
 
     return (
         <form onSubmit={handleEdit} className="rightbar-info">

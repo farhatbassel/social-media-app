@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function closeFriend({ user, friend }) {
+export default function closeFriend({ friend }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
     return (

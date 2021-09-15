@@ -73,8 +73,8 @@ export default function Sidebar() {
                 <h4 className='sidebar-favorites'>Favorites</h4>
                 <ul className="sidebar-friend-list">
                     {favorites.map((friend) => (
-                        <Link to={'/profile/' + friend.username} style={{ textDecoration: "none", color: '#000' }}>
-                            <CloseFriend key={friend.id} friend={friend} />
+                        <Link to={'/profile/' + friend.username} style={{ textDecoration: "none", color: '#000' }} key={friend._id}>
+                            <CloseFriend friend={friend} />
                         </Link>
                     )
                     )}

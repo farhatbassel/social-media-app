@@ -3,7 +3,6 @@ import { format } from 'timeago.js'
 export default function Message({ message, own }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
 
-    console.log('own is ' + own)
     return (
         <div className={own ? 'message own' : 'message'}>
             <div className="message-top">

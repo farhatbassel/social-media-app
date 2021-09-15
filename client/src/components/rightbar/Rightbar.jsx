@@ -14,20 +14,20 @@ export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
     const [friends, setFriends] = useState([]);
     const { user: currentUser, dispatch } = useContext(AuthContext)
-    const [followed, setFollowed] = useState(currentUser.followings.includes(user?.id));
-    const [favored, setFavored] = useState(currentUser.favorites.includes(user?._id))
+    const [followed, setFollowed] = useState(true);
+    const [favored, setFavored] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
         const getFriends = async () => {
             try {
-                const friendList = await axios.get("/users/friends/" + user._id);
-                setFriends(friendList.data);
+                const friendList = await axios.get("/users/friends/" + user?._id);
+                setFriends(friendList?.data);
             } catch (error) {
                 console.log(error);
             }
         };
-        getFriends();
+        user && getFriends();
     }, [user]);
 
     const handleFollow = async () => {
@@ -63,6 +63,12 @@ export default function Rightbar({ user }) {
         }
         setFavored(!favored)
     }
+
+    // not redenring followed
+    useEffect(() => {
+        setFavored(currentUser.favorites.includes(user?._id))
+        setFollowed(currentUser.followings.includes(user?.id))
+    }, [user, currentUser])
 
     const HomeRightbar = () => {
         return (
@@ -110,7 +116,7 @@ export default function Rightbar({ user }) {
                 </div>
                 {
                     isEditing ?
-                        < InfoEdit user={user} setIsEditing={setIsEditing} isEditing={isEditing} /> : <DisplayInfo user={user} />
+                        <InfoEdit user={user} setIsEditing={setIsEditing} isEditing={isEditing} /> : <DisplayInfo user={user} />
                 }
                 <h4 className="rightbar-followings-title">Followings</h4>
                 <section className="rightbar-followings">

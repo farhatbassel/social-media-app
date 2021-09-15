@@ -14,13 +14,34 @@ export default function Messenger() {
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
+    const [arrivalMessage, setArrivalMessage] = useState(null)
+    const [onlineUsers, setOnlineUsers] = useState([])
     const { user } = useContext(AuthContext)
     const scrollRef = useRef()
-    const [socket, setSocket] = useState(null)
+    const socket = useRef()
 
     useEffect(() => {
-        setSocket(io("ws://localhost:8900"))
+        socket.current = io('ws://localhost:8900')
+        socket.current.on('getMessage', data => {
+            setArrivalMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now(),
+            })
+        })
     }, [])
+
+    useEffect(() => {
+        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) &&
+            setMessages(prev => [...prev, arrivalMessage])
+    }, [arrivalMessage, currentChat])
+
+    useEffect(() => {
+        socket.current.emit('addUser', user._id)
+        socket.current.on('getUsers', (users) => {
+            setOnlineUsers(user.followings.filter((f) => users.some((u) => u.userId === f)))
+        })
+    }, [user])
 
     // Gets a conversation if available, else makes a new one and sets the created conversation to the current chat
     const handleConversation = async (friend) => {
@@ -34,7 +55,6 @@ export default function Messenger() {
                     }
                     try {
                         const res = await axios.post('/conversations/', conversationMembers)
-                        console.log(res)
                         setCurrentChat(res.data)
                     } catch (error) {
                         console.log(error)
@@ -59,6 +79,14 @@ export default function Messenger() {
             text: newMessage,
             conversationId: currentChat._id,
         }
+
+        const receiverId = currentChat.members.find(member => member !== user._id)
+        socket.current.emit('sendMessage', {
+            senderId: user._id,
+            receiverId,
+            text: newMessage
+        })
+
         try {
             const res = await axios.post('/messages/', message)
             setMessages([...messages, res.data])
@@ -83,7 +111,7 @@ export default function Messenger() {
     useEffect(() => {
         const getMessages = async () => {
             try {
-                const res = await axios.get('/messages/' + currentChat._id)
+                const res = await axios.get('/messages/' + currentChat?._id)
                 setMessages(res.data)
             } catch (error) {
                 console.log(error)
@@ -118,7 +146,6 @@ export default function Messenger() {
                             <>
                                 <div className="chat-box-top">
                                     {messages.map((message) => {
-                                        console.log(message)
                                         return (
                                             <div ref={scrollRef}>
                                                 <Message message={message} key={message._id} own={message.senderId === user._id} />
@@ -126,17 +153,17 @@ export default function Messenger() {
                                         )
                                     })}
                                 </div>
-                                <div className="chat-box-bottom">
+                                <form onSubmit={handleSendMessage} className="chat-box-bottom">
                                     <textarea placeholder='Message' className='chat-box-message' value={newMessage} onChange={(e) => setNewMessage(e.target.value)}></textarea>
-                                    <button className="chat-submit-button" onClick={handleSendMessage}>Send</button>
-                                </div>
+                                    <button className="chat-submit-button" type='submit'>Send</button>
+                                </form>
                             </> : <span className='no-conversation'>Open a conversation to start a chat</span>
                         }
                     </div>
                 </section>
                 <section className='chat-online'>
                     <div className="chat-online-wrapper">
-                        <ChatOnline />
+                        <ChatOnline onlineUsers={onlineUsers} friends={friends} />
                     </div>
                 </section>
             </div>

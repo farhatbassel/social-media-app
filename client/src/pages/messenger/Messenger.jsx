@@ -80,13 +80,13 @@ export default function Messenger() {
             conversationId: currentChat._id,
         }
 
+
         const receiverId = currentChat.members.find(member => member !== user._id)
         socket.current.emit('sendMessage', {
             senderId: user._id,
             receiverId,
             text: newMessage
         })
-
         try {
             const res = await axios.post('/messages/', message)
             setMessages([...messages, res.data])
@@ -112,6 +112,7 @@ export default function Messenger() {
         const getMessages = async () => {
             try {
                 const res = await axios.get('/messages/' + currentChat?._id)
+
                 setMessages(res.data)
             } catch (error) {
                 console.log(error)
@@ -157,6 +158,7 @@ export default function Messenger() {
                                     <textarea placeholder='Message' className='chat-box-message' value={newMessage} onChange={(e) => setNewMessage(e.target.value)}></textarea>
                                     <button className="chat-submit-button" type='submit'>Send</button>
                                 </form>
+
                             </> : <span className='no-conversation'>Open a conversation to start a chat</span>
                         }
                     </div>

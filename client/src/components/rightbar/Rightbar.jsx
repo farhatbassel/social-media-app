@@ -73,11 +73,11 @@ export default function Rightbar({ user }) {
     const HomeRightbar = () => {
         return (
             <>
-                <section className='birthday-container'>
+                {/* <section className='birthday-container'>
                     <img src={`${PF}gift.png`} className='birthday-image' alt="" />
                     <span className="birthday-text"> <b>Pola Foster</b> and <b>3 other friends</b> have their birthday today.</span>
-                </section>
-                <img src={`${PF}lamaAd.png`} className='rightbar-ad' alt="" />
+                </section> */}
+                {/* <img src={`${PF}lamaAd.png`} className='rightbar-ad' alt="" /> */}
                 <h4 className="rightbar-title">Online Friends</h4>
                 <ul className="rightbar-friend-list">
                     {Users.map((user) => (

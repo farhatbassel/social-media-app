@@ -36,10 +36,10 @@ export default function Sidebar() {
                     <li className="sidebar-list-item">
                         <Link to={`/messenger`} style={{ textDecoration: "none", color: "#000", display: 'flex', alignItems: 'center' }}>
                             <Message className='sidebar-icon' />
-                            <span className="sidebar-list-item-text">Chats</span>
+                            <span className="sidebar-list-item-text">Messaging</span>
                         </Link>
                     </li>
-                    <li className="sidebar-list-item">
+                    {/* <li className="sidebar-list-item">
                         <PlayCircleOutline className='sidebar-icon' />
                         <span className="sidebar-list-item-text">Videos</span>
                     </li>
@@ -66,9 +66,9 @@ export default function Sidebar() {
                     <li className="sidebar-list-item">
                         <School className='sidebar-icon' />
                         <span className="sidebar-list-item-text">Courses</span>
-                    </li>
+                    </li> */}
                 </ul>
-                <button className="sidebar-button">Show More</button>
+                {/* <button className="sidebar-button">Show More</button> */}
                 <hr className='sidebar-hr' />
                 <h4 className='sidebar-favorites'>Favorites</h4>
                 <ul className="sidebar-friend-list">

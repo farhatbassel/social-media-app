@@ -61,7 +61,7 @@ export default function Share() {
                             <span className='share-option-text'>Photo or Video</span>
                             <input style={{ display: 'none' }} type="file" id='file' accept="png,jpeg,jpg" onChange={(e) => setFile(e.target.files[0])} />
                         </label>
-                        <div className="share-option">
+                        {/* <div className="share-option">
                             <Label htmlColor='blue' className='share-icon' />
                             <span className='share-option-text'>Tag</span>
                         </div>
@@ -72,7 +72,7 @@ export default function Share() {
                         <div className="share-option">
                             <EmojiEmotions htmlColor='goldenrod' className='share-icon' />
                             <span className='share-option-text'>Feelings</span>
-                        </div>
+                        </div> */}
                     </div>
                     <button className="share-button" type='submit'>Share</button>
                 </form>

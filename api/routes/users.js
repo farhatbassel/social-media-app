@@ -198,4 +198,43 @@ router.put("/:id/unfavorite", async (req, res) => {
   }
 });
 
+router.get("/all", async (req, res)=>{
+  const query = req.query.new;
+  if (req.user.isAdmin){
+    try{
+      const users = query ? await User.find().limit(10) : await User.find();
+      req.status(200).json(users);
+    }catch(error){
+      res.status(500).json(error);
+    }
+  }
+  else{
+    res.status(403).json('You are not allowed to see this data!')
+  }
+});
+
+router.get("/stats", async (req, res) => {
+  const today = new Date();
+  const latYear = today.setFullYear(today.setFullYear() - 1);
+
+  try {
+    const data = await User.aggregate([
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    res.status(200).json(data)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router

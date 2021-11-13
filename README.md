@@ -31,8 +31,8 @@ https://user-images.githubusercontent.com/73551211/141531545-5d1015a0-e9c1-4b22-
 # Features
 
 ## Video Timestamps:
-- 00:00 - 00:09: Looking through feed (Seeing followers posts, Liking/Unlicking)
-- 00:10 - 00:22: Going to other users profile / Folowing new people
+- 00:00 - 00:09: Looking through feed (Seeing followers posts, Liking/Unliking)
+- 00:10 - 00:22: Going to other users profile / Following new people
 - 00:23 - 00:31: Posting on your profile/ Upload an image/ Removing Uploaded image.
 
 https://user-images.githubusercontent.com/73551211/141530822-2d38cdcb-4bdd-4f30-a101-63c1e9170ac4.mp4
